@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,9 +17,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-card">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <a href="#" className="font-display text-3xl tracking-wider gold-text">
+        <Link to="/" className="font-display text-3xl tracking-wider gold-text">
           SSLU<span className="text-foreground">rent</span>.com
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map((l) => (
