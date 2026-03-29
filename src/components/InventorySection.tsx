@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import VehicleCard, { type Vehicle } from "./VehicleCard";
 
 interface InventorySectionProps {
@@ -6,7 +7,7 @@ interface InventorySectionProps {
   title: string;
   subtitle: string;
   vehicles: Vehicle[];
-  icon?: string;
+  icon?: ReactNode;
 }
 
 const InventorySection = ({ id, title, subtitle, vehicles, icon }: InventorySectionProps) => {

@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import InventorySection from "@/components/InventorySection";
 import Footer from "@/components/Footer";
+import CountryFlag from "@/components/CountryFlag";
 import {
   onIslandVehicles,
   shippingVehicles,
@@ -33,7 +34,7 @@ const Index = () => {
 
       <InventorySection
         id="japan"
-        icon="🇯🇵"
+        icon={<CountryFlag code="JP" label="Japan" className="w-5 h-5 inline-block align-middle" />}
         title="Stock in Japan"
         subtitle="Won from auction and ready for shipping regionally. Ships to Bahamas, Jamaica, Dominica, St. Lucia, and Grenada."
         vehicles={japanStockVehicles}

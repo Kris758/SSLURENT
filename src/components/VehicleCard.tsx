@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Clock, ExternalLink } from "lucide-react";
+import CountryFlag, { type CountryCode } from "./CountryFlag";
 
 export interface Vehicle {
   name: string;
@@ -7,6 +8,7 @@ export interface Vehicle {
   image: string;
   eta: string;
   destination: string;
+  destinationCountry?: CountryCode;
   deposit?: string;
   link: string;
   status: "available" | "reserved" | "sold";
@@ -64,6 +66,9 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <MapPin className="w-3 h-3" />
+            {vehicle.destinationCountry && (
+              <CountryFlag code={vehicle.destinationCountry} label={vehicle.destination} className="w-4 h-4 inline-block" />
+            )}
             {vehicle.destination}
           </span>
           <span className="flex items-center gap-1">

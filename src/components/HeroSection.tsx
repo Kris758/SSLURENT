@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Ship, Award, ArrowDown } from "lucide-react";
+import CountryFlag from "./CountryFlag";
 
 const HeroSection = () => {
   return (
@@ -27,7 +28,25 @@ const HeroSection = () => {
             Only <span className="text-gold font-semibold">the best</span> vehicle trims — shipped directly from Japan's vehicle auction to the Caribbean.
           </p>
           <p className="text-sm text-muted-foreground mb-8">
-            St. Lucia 🇱🇨 &bull; Jamaica 🇯🇲 &bull; Bahamas 🇧🇸 &bull; Dominica 🇩🇲 &bull; Grenada 🇬🇩
+            <span className="inline-flex items-center gap-2">
+              St. Lucia <CountryFlag code="LC" label="St. Lucia flag" className="w-4 h-4 inline-block" />
+            </span>{" "}
+            &bull;{" "}
+            <span className="inline-flex items-center gap-2">
+              Jamaica <CountryFlag code="JM" label="Jamaica flag" className="w-4 h-4 inline-block" />
+            </span>{" "}
+            &bull;{" "}
+            <span className="inline-flex items-center gap-2">
+              Bahamas <CountryFlag code="BS" label="Bahamas flag" className="w-4 h-4 inline-block" />
+            </span>{" "}
+            &bull;{" "}
+            <span className="inline-flex items-center gap-2">
+              Dominica <CountryFlag code="DM" label="Dominica flag" className="w-4 h-4 inline-block" />
+            </span>{" "}
+            &bull;{" "}
+            <span className="inline-flex items-center gap-2">
+              Grenada <CountryFlag code="GD" label="Grenada flag" className="w-4 h-4 inline-block" />
+            </span>
           </p>
         </motion.div>
 
