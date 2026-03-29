@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Clock, ExternalLink } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import CountryFlag, { type CountryCode } from "./CountryFlag";
 
 export interface Vehicle {
@@ -27,22 +28,24 @@ const statusLabels = {
 };
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.a
       href={vehicle.link}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group glass-card rounded-xl overflow-hidden hover:border-gold/40 transition-all duration-300 block"
+      initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+      viewport={isMobile ? undefined : { once: true, margin: "0px 0px -12% 0px", amount: 0.15 }}
+      transition={isMobile ? { duration: 0 } : { duration: 0.45, delay: Math.min(index, 5) * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+      className="group glass-card rounded-xl overflow-hidden hover:border-gold/40 transition-colors duration-300 block"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={vehicle.image}
           alt={vehicle.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover md:transition-transform md:duration-500 md:group-hover:scale-105"
           loading="lazy"
         />
         <div className="absolute top-3 right-3">
