@@ -24,9 +24,6 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Build
-        env:
-          # Project site: /REPO_NAME/. User site (repo USER.github.io): /
-          GITHUB_PAGES_BASE: ${{ endsWith(github.event.repository.name, '.github.io') && '/' || format('/{0}/', github.event.repository.name) }}
         run: npm run build
       - name: SPA fallback (client-side routes)
         run: cp dist/index.html dist/404.html

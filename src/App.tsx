@@ -5,13 +5,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { getRouterBasename } from "./lib/routerBasename.ts";
 
 const queryClient = new QueryClient();
 
-const routerBasename = (() => {
-  const base = import.meta.env.BASE_URL;
-  return base === "/" ? undefined : base.replace(/\/$/, "");
-})();
+const routerBasename = getRouterBasename();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
