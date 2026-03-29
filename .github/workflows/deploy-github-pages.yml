@@ -1,8 +1,12 @@
+# Publishes the Vite `dist/` folder. GitHub Pages must use this workflow — NOT
+# "Deploy from a branch" (Jekyll). Jekyll never runs `npm run build` and will
+# break or skip parts of this SPA.
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -31,6 +35,8 @@ jobs:
         run: npm run build
       - name: SPA fallback (client-side routes)
         run: cp dist/index.html dist/404.html
+      - name: Disable Jekyll on published site (static files only)
+        run: touch dist/.nojekyll
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
