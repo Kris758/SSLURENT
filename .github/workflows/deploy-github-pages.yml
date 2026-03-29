@@ -24,6 +24,10 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Build
+        env:
+          # User/org site: repo named OWNER.github.io → served at site root (`base: /`).
+          # Otherwise project site at https://OWNER.github.io/REPO/ → `base: /REPO/`.
+          VITE_PAGES_BASE: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}/', github.event.repository.name) }}
         run: npm run build
       - name: SPA fallback (client-side routes)
         run: cp dist/index.html dist/404.html

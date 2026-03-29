@@ -1,19 +1,7 @@
 /**
- * Resolves BrowserRouter basename for static hosts (e.g. GitHub Pages project sites).
- * Production builds use `base: './'` so asset URLs stay correct even when the site
- * is served from a subpath; `import.meta.env.BASE_URL` is then `./`, so we infer
- * `/repo` from `window.location.pathname` when needed.
+ * Browser basename for React Router. Must match Vite `base` (see `import.meta.env.BASE_URL`).
  */
-export function getRouterBasename(): string | undefined {
-  const configured = import.meta.env.BASE_URL ?? "/";
-
-  if (configured !== "/" && configured !== "./") {
-    const trimmed = configured.replace(/\/$/, "");
-    return trimmed === "" ? undefined : trimmed;
-  }
-
-  if (typeof window === "undefined") return undefined;
-
+function inferBasenameFromPathname(): string | undefined {
   let segments = window.location.pathname
     .replace(/\/$/, "")
     .split("/")
@@ -28,4 +16,20 @@ export function getRouterBasename(): string | undefined {
   if (first.includes(".")) return undefined;
 
   return `/${first}`;
+}
+
+export function getRouterBasename(): string | undefined {
+  const base = import.meta.env.BASE_URL ?? "/";
+
+  if (base !== "/" && base !== "./") {
+    const trimmed = base.replace(/\/$/, "");
+    return trimmed === "" ? undefined : trimmed;
+  }
+
+  if (base === "/" || typeof window === "undefined") {
+    return undefined;
+  }
+
+  // Local builds use `base: './'` — infer `/repo` when previewing under a subpath.
+  return inferBasenameFromPathname();
 }
